@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'dart:math' as math;
 
-class IntroOne extends StatelessWidget {
+class IntroThree extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -21,10 +21,8 @@ class IntroOne extends StatelessWidget {
               Consumer<OffsetNotifier>(
                 builder: (context, value, child) {
                   return Transform.scale(
-                    scale: math.max(0, 1 - value.page),
-                    child: Opacity(
-                        opacity: math.max(0, math.max(0, 1 - value.page)),
-                        child: child),
+                    scale: math.max(0, 1 - (1 - (4 * value.page - 7))),
+                    child: child,
                   );
                 },
                 child: Container(
@@ -36,14 +34,15 @@ class IntroOne extends StatelessWidget {
               ),
               Consumer<OffsetNotifier>(
                 builder: (context, value, child) {
-                  return Transform.rotate(
-                    angle: math.max(0, (math.pi / 2) * 4 * value.page),
+                  return Transform(
+                    alignment: FractionalOffset.center,
+                    transform: Matrix4.translationValues(
+                        0, 100 * (1 - (4 * value.page - 7)), 0)
+                      ..rotateZ((-math.pi / 2) * 2 * value.page),
                     child: child,
                   );
                 },
-                child: Image.asset(
-                  intros[0].image,
-                ),
+                child: Image.asset(intros[2].image),
               ),
             ],
           ),
@@ -53,33 +52,35 @@ class IntroOne extends StatelessWidget {
         ),
         Consumer<OffsetNotifier>(
           builder: (context, value, child) {
-            return Opacity(
-              opacity: math.max(0, 1 - 4 * value.page),
+            return Transform.translate(
+              offset: Offset(0, -50 * (1 - (4 * value.page - 7))),
               child: child,
             );
           },
-          child: Column(
-            children: [
-              Text(
-                intros[0].title,
-                style: GoogleFonts.quicksand(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 40,
-                    letterSpacing: 2),
-              ),
-              SizedBox(
-                height: 16,
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: Text(
-                  intros[0].subtitile,
-                  style: GoogleFonts.quicksand(
-                      fontSize: 18, fontWeight: FontWeight.w500),
-                  textAlign: TextAlign.center,
-                ),
-              )
-            ],
+          child: Text(
+            intros[2].title,
+            style: GoogleFonts.quicksand(
+                fontWeight: FontWeight.bold, fontSize: 40, letterSpacing: 2),
+          ),
+        ),
+        SizedBox(
+          height: 16,
+        ),
+        Consumer<OffsetNotifier>(
+          builder: (context, value, child) {
+            return Opacity(
+              opacity: math.max(0, 4 * value.page - 7),
+              child: child,
+            );
+          },
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: Text(
+              intros[2].subtitile,
+              style: GoogleFonts.quicksand(
+                  fontSize: 18, fontWeight: FontWeight.w500),
+              textAlign: TextAlign.center,
+            ),
           ),
         )
       ],

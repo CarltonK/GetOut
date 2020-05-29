@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'dart:math' as math;
 
-class IntroOne extends StatelessWidget {
+class IntroTwo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -20,11 +20,17 @@ class IntroOne extends StatelessWidget {
             children: [
               Consumer<OffsetNotifier>(
                 builder: (context, value, child) {
+                  double multiplier;
+
+                  if (value.page <= 1.0) {
+                    multiplier = math.max(0, 4 * value.page - 3);
+                  } else {
+                    multiplier = math.max(0, 1 - (4 * value.page - 4));
+                  }
+
                   return Transform.scale(
-                    scale: math.max(0, 1 - value.page),
-                    child: Opacity(
-                        opacity: math.max(0, math.max(0, 1 - value.page)),
-                        child: child),
+                    scale: multiplier,
+                    child: child,
                   );
                 },
                 child: Container(
@@ -36,14 +42,20 @@ class IntroOne extends StatelessWidget {
               ),
               Consumer<OffsetNotifier>(
                 builder: (context, value, child) {
-                  return Transform.rotate(
-                    angle: math.max(0, (math.pi / 2) * 4 * value.page),
-                    child: child,
+                  double multiplier;
+
+                  if (value.page <= 1.0) {
+                    multiplier = math.max(0, 4 * value.page - 3);
+                  } else {
+                    multiplier = math.max(0, 1 - (4 * value.page - 4));
+                  }
+
+                  return Transform.translate(
+                    offset: Offset(0, -50 * (1 - multiplier)),
+                    child: Opacity(opacity: multiplier, child: child),
                   );
                 },
-                child: Image.asset(
-                  intros[0].image,
-                ),
+                child: Image.asset(intros[1].image),
               ),
             ],
           ),
@@ -53,15 +65,23 @@ class IntroOne extends StatelessWidget {
         ),
         Consumer<OffsetNotifier>(
           builder: (context, value, child) {
-            return Opacity(
-              opacity: math.max(0, 1 - 4 * value.page),
+            double multiplier;
+
+            if (value.page <= 1.0) {
+              multiplier = math.max(0, 4 * value.page - 3);
+            } else {
+              multiplier = math.max(0, 1 - (4 * value.page - 4));
+            }
+
+            return Transform.translate(
+              offset: Offset(0, -50 * (1 - multiplier)),
               child: child,
             );
           },
           child: Column(
             children: [
               Text(
-                intros[0].title,
+                intros[1].title,
                 style: GoogleFonts.quicksand(
                     fontWeight: FontWeight.bold,
                     fontSize: 40,
@@ -73,7 +93,7 @@ class IntroOne extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
-                  intros[0].subtitile,
+                  intros[1].subtitile,
                   style: GoogleFonts.quicksand(
                       fontSize: 18, fontWeight: FontWeight.w500),
                   textAlign: TextAlign.center,

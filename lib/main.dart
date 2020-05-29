@@ -18,9 +18,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: ChangeNotifierProvider(
-        create: (context) => IndexNotifier(),
-        child: OnBoarding()
-      ),
+          create: (context) => IndexNotifier(), child: OnBoarding()),
     );
   }
 }

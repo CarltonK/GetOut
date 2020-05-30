@@ -56,27 +56,33 @@ class _OnBoardingState extends State<OnBoarding> {
               height: 20,
             ),
             Expanded(
-                child: PageView(
-              controller: _pageController,
-              onPageChanged: (int index) {
-                Provider.of<IndexNotifier>(context, listen: false).index =
+              child: PageView(
+                controller: _pageController,
+                onPageChanged: (int index) {
+                  Provider.of<IndexNotifier>(context, listen: false).index =
                     index;
-                setState(() {
+                  setState(() {
                   _globalIndex = index;
-                });
-              },
-              children: [IntroOne(), IntroTwo(), IntroThree()],
-            )),
+                  });
+                },
+                children: [IntroOne(), IntroTwo(), IntroThree()],
+              )
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                PageIndicator(),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: PageIndicator(),
+                ),
                 _globalIndex == 2
-                    ? IconButton(
-                        onPressed: () => print('GET STARTED'),
-                        padding: EdgeInsets.all(8),
-                        icon: Icon(Icons.arrow_forward_ios,)
+                    ? Padding(
+                      padding: EdgeInsets.only(right: 25),
+                      child: GestureDetector(
+                        child: Icon(Icons.arrow_forward_ios,),
+                        onTap: () => print('GET STARTED'),
                       )
+                    )
                     : Container()
               ],
             ),

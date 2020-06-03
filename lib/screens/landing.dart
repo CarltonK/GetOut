@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:getout/screens/authentication/login.dart';
+import 'package:getout/screens/authentication/registration.dart';
 import 'package:getout/widgets/carouselSlider.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -19,7 +21,10 @@ class LandingScreen extends StatelessWidget {
               padding: EdgeInsets.all(16),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8)),
-              onPressed: () => print('SIGN IN'),
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => LoginScreen()));
+              },
               child: Text(
                 'SIGN IN',
                 style: GoogleFonts.quicksand(
@@ -37,7 +42,10 @@ class LandingScreen extends StatelessWidget {
               padding: EdgeInsets.all(16),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8)),
-              onPressed: () => print('SIGN UP'),
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => RegistrationScreen()));
+              },
               child: Text(
                 'SIGN UP',
                 style: GoogleFonts.quicksand(

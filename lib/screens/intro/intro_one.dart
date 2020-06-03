@@ -49,7 +49,7 @@ class IntroOne extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 20,
+          height: 10,
         ),
         Consumer<OffsetNotifier>(
           builder: (context, value, child) {
@@ -68,7 +68,7 @@ class IntroOne extends StatelessWidget {
                     letterSpacing: 2),
               ),
               SizedBox(
-                height: 16,
+                height: 8,
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20),

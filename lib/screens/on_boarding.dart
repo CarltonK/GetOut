@@ -59,7 +59,7 @@ class _OnBoardingState extends State<OnBoarding> {
           children: [
             _introHeader(),
             SizedBox(
-              height: 20,
+              height: 10,
             ),
             Expanded(
                 child: PageView(

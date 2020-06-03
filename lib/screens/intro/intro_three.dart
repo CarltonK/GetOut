@@ -48,7 +48,7 @@ class IntroThree extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 20,
+          height: 10,
         ),
         Consumer<OffsetNotifier>(
           builder: (context, value, child) {
@@ -64,7 +64,7 @@ class IntroThree extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 16,
+          height: 8,
         ),
         Consumer<OffsetNotifier>(
           builder: (context, value, child) {

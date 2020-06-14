@@ -89,12 +89,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             borderRadius: BorderRadius.circular(16), color: Colors.transparent),
         child: TextFormField(
           autofocus: false,
-          keyboardType: TextInputType.emailAddress,
+          keyboardType: TextInputType.text,
           textInputAction: TextInputAction.next,
           onFieldSubmitted: (value) {
             FocusScope.of(context).requestFocus(focusLname);
           },
-          onSaved: _handleEmailInput,
+          onSaved: _handleFirstNameInput,
           validator: (value) {
             //Check if fname exists
             if (value.isEmpty) {
@@ -121,12 +121,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             borderRadius: BorderRadius.circular(16), color: Colors.transparent),
         child: TextFormField(
           autofocus: false,
-          keyboardType: TextInputType.emailAddress,
+          keyboardType: TextInputType.text,
           textInputAction: TextInputAction.next,
           onFieldSubmitted: (value) {
             FocusScope.of(context).requestFocus(focusEmail);
           },
-          onSaved: _handleEmailInput,
+          focusNode: focusLname,
+          onSaved: _handleLastNameInput,
           validator: (value) {
             //Check if lname exists
             if (value.isEmpty) {
@@ -158,6 +159,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           onFieldSubmitted: (value) {
             FocusScope.of(context).requestFocus(focusPhone);
           },
+          focusNode: focusEmail,
           onSaved: _handleEmailInput,
           validator: (value) {
             //Check if email exists
@@ -190,8 +192,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           onFieldSubmitted: (value) {
             FocusScope.of(context).unfocus();
           },
-          onSaved: _handlePassword1Input,
+          onSaved: _handlePhoneInput,
           autofocus: false,
+          focusNode: focusPhone,
           validator: (value) {
             //Check if phone exists
             if (value.isEmpty) {
@@ -207,9 +210,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             }
             return null;
           },
-          keyboardType: TextInputType.text,
+          keyboardType: TextInputType.phone,
           textInputAction: TextInputAction.done,
-          obscureText: _isPasswordVisible,
           decoration: InputDecoration(
             border: UnderlineInputBorder(
                 borderSide: BorderSide(color: Colors.black)),
@@ -317,6 +319,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             }
             return null;
           },
+          onSaved: _handlePassword2Input,
           autovalidate: true,
           keyboardType: TextInputType.text,
           textInputAction: TextInputAction.done,
@@ -335,7 +338,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
   Widget pageOne() {
     return Container(
-      height: 500,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -411,7 +413,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     return Container(
         height: double.infinity,
         width: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.only(top: 60, left: 20, right: 20),
+        padding: EdgeInsets.only(top: 60, left: 20, right: 20, bottom: 5),
         child: PageView(
           controller: _controller,
           physics: NeverScrollableScrollPhysics(),
@@ -465,9 +467,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         ),
                         onPressed: () {
                           if (_page == 0) {
-                            _controller.nextPage(
+                            final FormState formOne = _formKey.currentState;
+                            if (formOne.validate()) {
+                              formOne.save();
+
+                               _controller.nextPage(
                                 duration: Duration(milliseconds: 200),
                                 curve: Curves.ease);
+                            }
                           }
                         },
                       ),
@@ -534,7 +541,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: _buildPageIndicator(),
-                    )
+                    ),
                   ],
                 ),
               ),

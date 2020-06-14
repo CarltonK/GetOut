@@ -14,7 +14,7 @@ class IntroOne extends StatelessWidget {
       children: [
         Container(
           width: double.infinity,
-          height: 500,
+          height: MediaQuery.of(context).size.height * 0.6,
           child: Stack(
             alignment: Alignment.center,
             children: [

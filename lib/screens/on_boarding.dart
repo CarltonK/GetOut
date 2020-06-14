@@ -22,13 +22,12 @@ class _OnBoardingState extends State<OnBoarding> {
   @override
   void initState() {
     super.initState();
-    SystemChrome.setEnabledSystemUIOverlays([]);
     _pageController = PageController();
   }
 
   Widget _introHeader() {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.symmetric(vertical: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
@@ -59,7 +58,7 @@ class _OnBoardingState extends State<OnBoarding> {
           children: [
             _introHeader(),
             SizedBox(
-              height: 10,
+              height: 20,
             ),
             Expanded(
                 child: PageView(
@@ -98,9 +97,7 @@ class _OnBoardingState extends State<OnBoarding> {
                     : Container()
               ],
             ),
-            SizedBox(
-              height: 8,
-            )
+            SizedBox(height: 8)
           ],
         ),
       ),

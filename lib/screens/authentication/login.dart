@@ -120,15 +120,16 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget loginBody() {
     return Container(
-      height: double.infinity,
+      height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
-      padding: EdgeInsets.only(top: 100, left: 20, right: 20),
+      padding: EdgeInsets.only(top: 60, left: 20, right: 20),
       child: SingleChildScrollView(
         physics: AlwaysScrollableScrollPhysics(),
         child: Form(
           key: _formKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 'GETOUT',
@@ -176,7 +177,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               SizedBox(
-                height: 90,
+                height: 50,
               ),
               socialSignUp()
             ],
